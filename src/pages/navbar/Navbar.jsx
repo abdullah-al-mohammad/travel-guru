@@ -11,7 +11,7 @@ const Navbar = () => {
         <li><NavLink className='btn btn-warning px-6' to='/login'>Login</NavLink></li>
     </>
     return (
-        <div className="navbar bg-base-100 bg-transparent">
+        <div className="navbar bg-base-100 bg-transparent mb-8">
             <img className='w-20 text-white' src={logo} alt="" />
             <div className="navbar-end">
                 <div className="dropdown">
