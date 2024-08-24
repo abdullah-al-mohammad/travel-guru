@@ -1,3 +1,8 @@
 .bgImg{
-    background: url('../../assets/Rectangle 1.png');
+    /* background: url('../../assets/Rectangle 1.png'); */
+    background: linear-gradient(#0F030370, #0d0d0da1),url("../../assets/Rectangle 1.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 500px;
 }
