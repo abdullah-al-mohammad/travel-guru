@@ -12,7 +12,7 @@ const Navbar = () => {
     </>
     return (
         <div className="navbar bg-base-100 bg-transparent mb-8">
-            <img className='w-20 text-white' src={logo} alt="" />
+            <img className='w-20 bg-white p-2' src={logo} alt="" />
             <div className="navbar-end">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

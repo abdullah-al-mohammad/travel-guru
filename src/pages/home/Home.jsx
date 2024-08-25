@@ -7,6 +7,7 @@ import sajek from '../../assets/Sajek.png'
 import sreemongol from '../../assets/Sreemongol.png'
 import sundorbon from '../../assets/sundorbon.png'
 import { FaArrowRight } from "react-icons/fa6";
+import { Link, Navigate } from "react-router-dom";
 
 
 const Home = () => {
@@ -18,10 +19,12 @@ const Home = () => {
                     <div className="text-white space-y-6">
                         <h1 className="text-6xl font-bebasNeue">Cox's bazar</h1>
                         <p>Cox’s Bazar is a town on the southeast coast of Bangladesh. It’s known for its very long, sandy beachfront, stretching from Sea Beach in the north to Kolatoli Beach in the south. Aggameda Khyang monastery is home to bronze statues and centuries-old Buddhist manuscripts. South of town, the tropical rainforest of Himchari National Park has waterfalls and many birds. North, sea turtles breed on nearby Sonadia Island.</p>
-                        <button className="btn btn-warning">
-                            Booking
-                            <FaArrowRight></FaArrowRight>
-                        </button>
+                        <Link to='/booking'>
+                            <button className="btn btn-warning">
+                                Booking
+                                <FaArrowRight></FaArrowRight>
+                            </button>
+                        </Link>
                     </div>
                     <div>
                         <OwlCarousel className='owl-theme' loop margin={10} nav>
