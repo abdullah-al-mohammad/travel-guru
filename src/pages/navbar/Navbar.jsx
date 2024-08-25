@@ -36,7 +36,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-start">
-                    <label className="input input-bordered flex items-center gap-2 opacity-60 border-white">
+                    <label className="input input-bordered flex items-center gap-2 opacity-60 border-white h-8">
                         <FaSearch></FaSearch>
                         <input type="text" className="grow" placeholder="Search your Destination..." />
                     </label>
