@@ -1,15 +1,17 @@
 import React from 'react';
-import userContext from 'react'
+import {useContext} from 'react'
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Login = () => {
-    const loginUser = userContext(AuthContext)
+    const {loginUser} = useContext(AuthContext)
 
     const handleUserLogin = (e) =>{
         e.preventDefault()
         const form = new FormData(e.currentTarget)
         const email = form.get("email")
-        const password = form.get("passwird")
+        const password = form.get("password")
+        console.log(email, password);
+        
 
         loginUser(email, password)
         .then((result =>{
