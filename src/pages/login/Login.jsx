@@ -1,10 +1,12 @@
 import React from 'react';
 import {useContext} from 'react'
 import { AuthContext } from '../../provider/AuthProvider';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const {loginUser} = useContext(AuthContext)
-    console.log(loginUser);
+    const {user,loginUser} = useContext(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
     
     const handleUserLogin = (e) =>{
         e.preventDefault()
@@ -18,12 +20,15 @@ const Login = () => {
         .then((result =>{
             const user = result.user;
             console.log('User signed in',user);
+
+            // navigate after login
+            navigate(location?.state ? location.state : '/')
             
         }))
-        .catch((error) =>{
-            console.error('login error',error);
+        .catch((error =>{
+            console.error(error);
             
-        })
+        }))
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -41,7 +46,7 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" placeholder="email" name='email' className="input input-bordered" required />
+                            <input type="email" placeholder="Username or Email" name='email' className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -53,8 +58,9 @@ const Login = () => {
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Login</button>
+                            <button className="btn btn-warning">Login</button>
                         </div>
+                        <p>Don't have an account? <Link className='text-orange-400' to='/signUp'>Create an account</Link></p>
                     </form>
                 </div>
             </div>
