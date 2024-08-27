@@ -1,14 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import { useContext } from 'react'
 import { GoogleAuthProvider } from 'firebase/auth';
+import { FaFacebook, FaGoogle } from 'react-icons/fa6';
+import facebook from '../../assets/icons/fb.png'
+import google from '../../assets/icons/google.png'
+
 
 
 
 const Register = () => {
     
-    const { createUser, googleProvider } = useContext(AuthContext)
+    const { createUser, signInWithGoogle, user } = useContext(AuthContext)
+    const location = useLocation()
+    console.log(location);
+    
+    const navigate = useNavigate()
     
     const handleSignUp = e => {
         e.preventDefault()
@@ -24,7 +32,7 @@ const Register = () => {
         .then((result => {
                 const user = result.user
                 console.log(user);
-
+                
             }))
             .catch((error => {
                 console.error(error);
@@ -35,12 +43,12 @@ const Register = () => {
         
         
         const handleGoogleSignUp = () => {
-        const provider = new GoogleAuthProvider()
-        // google signUp
-        googleProvider(provider)
+            // google signUp
+            signInWithGoogle()
             .then((result => {
                 const user = result.user
                 console.log(user);
+                navigate(user ? '/' : 'user not login' )
 
             }))
             .catch((error => {
@@ -85,9 +93,6 @@ const Register = () => {
                                 <span className="label-text">Password</span>
                             </label>
                             <input type="password" placeholder="Confirm Password" name='password' className="input input-bordered" required />
-                            <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                            </label>
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-warning">Create an account</button>
@@ -96,8 +101,8 @@ const Register = () => {
                     </form>
                     <div>
                         <div className="form-control mt-6 space-y-3">
-                            <button className="btn btn-warning">Continue With Facebook</button>
-                            <button onClick={handleGoogleSignUp} className="btn btn-warning">Continue With Google</button>
+                            <button className="btn rounded-full border border-black"> <img className='w-6' src={facebook} alt="" /> Continue With Facebook</button>
+                            <button onClick={handleGoogleSignUp} className="btn rounded-full border border-black"> <img className='w-6' src={google} alt="" /> Continue With Google</button>
                         </div>
                     </div>
                 </div>

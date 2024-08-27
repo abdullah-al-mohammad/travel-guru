@@ -1,10 +1,11 @@
 import React from 'react';
 import {createContext, useState, useEffect} from 'react'
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import app from '../firebase/firebase.config';
 
 
 export const AuthContext = createContext(null)
+const googleProvider = new GoogleAuthProvider()
 const auth = getAuth(app)
 
 const AuthProvider = ({children}) => {
@@ -24,8 +25,8 @@ const AuthProvider = ({children}) => {
     }
 
     // continue with google
-    const googleProvider = () =>{
-        signInWithPopup(auth)
+    const signInWithGoogle = () =>{
+        return signInWithPopup(auth, googleProvider)
     }
 
     // function for Track user state
@@ -40,7 +41,7 @@ const AuthProvider = ({children}) => {
     },[])
 
 
-    const authInfo = {auth, user,  loginUser, createUser}
+    const authInfo = { auth, user,  loginUser, createUser, signInWithGoogle }
     return (
         <AuthContext.Provider  value={authInfo}>
             {children}
