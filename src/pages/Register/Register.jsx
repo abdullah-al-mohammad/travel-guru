@@ -5,6 +5,7 @@ import { useContext, useState } from 'react'
 import facebook from '../../assets/icons/fb.png'
 import google from '../../assets/icons/google.png'
 import { sendEmailVerification, updateProfile } from 'firebase/auth';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 
 
@@ -15,9 +16,10 @@ const Register = () => {
     const [success, setSuccess] = useState();
     const [error, setError] = useState();
     const location = useLocation()
-    console.log(location);
-
     const navigate = useNavigate()
+
+    // showing password
+    const [showPassword, setShowPassword] = useState(false)
 
     const handleSignUp = e => {
         e.preventDefault()
@@ -42,14 +44,14 @@ const Register = () => {
                 console.log(user);
                 setSuccess('User Created Successfully')
 
-                // upadate profile name
-                updateProfile(user,{
+                // update profile name
+                updateProfile(user, {
                     displayName: `${firstName} ${lastName}`
                 })
-                .then(() =>{
-                    console.log('update profile');
-                    
-                })
+                    .then(() => {
+                        console.log('update profile');
+
+                    })
                 // send email verification
                 sendEmailVerification(user)
                     .then(() => {
@@ -115,7 +117,18 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" placeholder="Confirm Password" name='password' className="input input-bordered" required />
+                            <div className='relative'>
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Confirm Password"
+                                    name='password'
+                                    className="input input-bordered w-full" required />
+                                <span className='absolute inset-y-0 top-4 right-2' onClick={() => setShowPassword(!showPassword)}>
+                                    {
+                                        showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
+                                    }
+                                </span>
+                            </div>
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-warning">Create an account</button>

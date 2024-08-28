@@ -20,7 +20,7 @@ const Booking = () => {
         <div className='bgImg h-screen'>
             <div className='container mx-auto'>
                 <Navbar></Navbar>
-                <div className='grid grid-cols-4 gap-x-16'>
+                <div className='grid grid-cols-1 md:grid-cols-4 md:gap-x-16'>
                     <div className='col-span-2'>
                         <div className="text-white space-y-6">
                             <h1 className="text-6xl font-bebasNeue">Cox's bazar</h1>
@@ -56,7 +56,7 @@ const Booking = () => {
                                                 <option>sylhet</option>
                                             </select>
                                         </div>
-                                        <div className='flex justify-between gap-3'>
+                                        <div className='lg:flex justify-between gap-3'>
                                             <div className="form-control">
                                                 <label className="label">
                                                     <span className="label-text">From</span>

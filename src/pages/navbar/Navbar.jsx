@@ -11,7 +11,6 @@ const Navbar = () => {
         <li><NavLink to='/destination'>Destination</NavLink></li>
         <li><NavLink to='/blog'>Blog</NavLink></li>
         <li><NavLink to='/contact'>Contact</NavLink></li>
-        {/* <li><NavLink className='btn btn-warning px-6' to='/login'>Login</NavLink></li> */}
     </>
     // logout
     const handleLogout = () => {
@@ -23,7 +22,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className="navbar bg-base-100 bg-transparent mb-8">
+        <div className="navbar md:flex bg-base-100 bg-transparent mb-8">
             <img className='w-20 bg-white p-2' src={logo} alt="" />
             <div className="navbar-end">
                 <div className="dropdown">
@@ -45,12 +44,18 @@ const Navbar = () => {
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                         {links}
+                        <div className="">
+                            <label className="input input-bordered flex items-center gap-2 opacity-60 border-white h-8 px-1">
+                                <FaSearch></FaSearch>
+                                <input type="text" className="w-1/5" placeholder="Search your Destination..." />
+                            </label>
+                        </div>
                     </ul>
                 </div>
-                <div className="navbar-start">
-                    <label className="input input-bordered flex items-center gap-2 opacity-60 border-white h-8">
+                <div className="navbar-start hidden lg:flex">
+                    <label className="input input-bordered flex items-center gap-2 opacity-60 border-white h-8 px-1">
                         <FaSearch></FaSearch>
-                        <input type="text" className="grow" placeholder="Search your Destination..." />
+                        <input type="text" className="grow w-auto" placeholder="Search your Destination..." />
                     </label>
                 </div>
             </div>
@@ -61,8 +66,8 @@ const Navbar = () => {
                     }
                 </ul>
             </div>
-            <div className="navbar-end hidden lg:flex">
-                {user ? <button onClick={handleLogout} className="btn">Sign Out</button>
+            <div className="navbar-end md:flex-col lg:flex">
+                {user ? <button onClick={handleLogout} className="btn btn-error">Sign Out</button>
                     :
                     <Link to="/login">
                         <button className="btn">Login</button>

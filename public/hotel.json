@@ -1,0 +1,32 @@
+[
+    {
+        "pic": "https://example.com/image1.jpg",
+        "title": "Cozy Cottage by the Lake",
+        "paragraph": "Enjoy a peaceful stay in our cozy cottage with stunning lake views and modern amenities.",
+        "rate": "4.9 (20)",
+        "price": {
+            "total": "$167",
+            "perNight": "$34/night"
+        }
+    },
+    {
+        "pic": "https://example.com/image2.jpg",
+        "title": "Modern Apartment in the City Center",
+        "paragraph": "Experience city life in our stylish apartment, located in the heart of downtown with easy access to attractions.",
+        "rate": "4.9 (20)",
+        "price": {
+            "total": "$167",
+            "perNight": "$34/night"
+        }
+    },
+    {
+        "pic": "https://example.com/image3.jpg",
+        "title": "Mountain Retreat Cabin",
+        "paragraph": "Escape to our secluded mountain cabin, perfect for a relaxing getaway with breathtaking views.",
+        "rate": "4.9 (20)",
+        "price": {
+            "total": "$167",
+            "perNight": "$34/night"
+        }
+    }
+]
