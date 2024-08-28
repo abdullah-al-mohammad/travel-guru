@@ -1,6 +1,6 @@
 import React from 'react';
 import {createContext, useState, useEffect} from 'react'
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import app from '../firebase/firebase.config';
 
 
@@ -29,6 +29,16 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth, googleProvider)
     }
 
+    // reset password
+    const emailPasswordReset = (email) =>{
+        return sendPasswordResetEmail(auth, email)
+    }
+
+
+    // send email verification
+    const emailVerification = () =>{
+        sendEmailVerification(user)
+    }
     // function for Track user state
     useEffect(() =>{
        const unsubsCribe =  onAuthStateChanged(auth, currentUser =>{
@@ -41,7 +51,7 @@ const AuthProvider = ({children}) => {
     },[])
 
 
-    const authInfo = { auth, user,  loginUser, createUser, signInWithGoogle }
+    const authInfo = { auth, user,  loginUser, createUser, signInWithGoogle, emailPasswordReset, emailVerification }
     return (
         <AuthContext.Provider  value={authInfo}>
             {children}

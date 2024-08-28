@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
-import { useContext } from 'react'
-import { GoogleAuthProvider } from 'firebase/auth';
-import { FaFacebook, FaGoogle } from 'react-icons/fa6';
+import { useContext, useState } from 'react'
 import facebook from '../../assets/icons/fb.png'
 import google from '../../assets/icons/google.png'
 
@@ -12,7 +10,9 @@ import google from '../../assets/icons/google.png'
 
 const Register = () => {
     
-    const { createUser, signInWithGoogle, user } = useContext(AuthContext)
+    const { createUser, signInWithGoogle, user, emailVerification } = useContext(AuthContext)
+    const [success, setSuccess] = useState();
+    const [error, setError] = useState();
     const location = useLocation()
     console.log(location);
     
@@ -26,12 +26,20 @@ const Register = () => {
         const email = form.get('email')
         const password = form.get('password')
         console.log(firstName, lastName, email, password);
+
+
+        if(password.length < 6 ){
+            setError('your password should be 6 charecter')
+        }else if(!/[A-Z]/.test(password)){
+            setError('your password should have at least one upperCase')
+        }
         
         // create user account function
         createUser(email, password)
         .then((result => {
                 const user = result.user
                 console.log(user);
+                setSuccess('User Created Successfully')
                 
             }))
             .catch((error => {
@@ -40,7 +48,16 @@ const Register = () => {
             }))
             
         }
-        
+
+        // send email verification
+        emailVerification()
+        .then(() =>{
+            alert('please check your email and verify your account')
+        })
+        .catch((error) =>{
+            console.error(error);
+            
+        })
         
         const handleGoogleSignUp = () => {
             // google signUp
@@ -105,6 +122,8 @@ const Register = () => {
                             <button onClick={handleGoogleSignUp} className="btn rounded-full border border-black"> <img className='w-6' src={google} alt="" /> Continue With Google</button>
                         </div>
                     </div>
+                    <p className='text-green-500 p-5'>{success}</p>
+                    <p className='text-green-500 p-5'>{error}</p>
                 </div>
             </div>
         </div>

@@ -1,24 +1,33 @@
 import React from 'react';
-import { useContext, useState } from 'react'
+import { useContext, useState, useRef } from 'react'
 import { AuthContext } from '../../provider/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login = () => {
-    const { user, loginUser } = useContext(AuthContext)
-    const [error, setLoginError] = useState()
+    const { user, loginUser, emailPasswordReset } = useContext(AuthContext)
+    // user success
+    const [success, setSuccess] = useState()
+    // error Handle
+    const [loginError, setLoginError] = useState()
+    // show password
     const [showPassword, setShowPassword] = useState(false)
+    // navigate
     const location = useLocation()
     const navigate = useNavigate()
+
+    // password reset by useRef
+    const emailRef = useRef(null)
 
     const handleUserLogin = (e) => {
         e.preventDefault()
         const form = new FormData(e.currentTarget)
         const email = form.get("email")
         const password = form.get("password")
-        console.log(email, password);
+        const accepted = form.get('checkbox')
+        console.log(email, password, accepted);
 
-
+        
         if (password.length < 6) {
             setLoginError('your password should be 6 cherecter')
             return
@@ -27,13 +36,22 @@ const Login = () => {
             setLoginError('your password should have at least one upperCase')
             return
         }
-
+        else if(!accepted){
+            setLoginError('Remember me')
+            return
+        }
+        
+        // reset
+        setLoginError('')
+        setSuccess('')
 
         loginUser(email, password)
             .then((result => {
                 const user = result.user;
                 console.log('User signed in', user);
-
+                
+                    // setSuccess('login Successful')
+                
                 // navigate after login
                 navigate(location?.state ? location.state : '/')
 
@@ -42,6 +60,31 @@ const Login = () => {
                 console.error(error);
 
             }))
+    }
+
+    const handleForgotPassword = () =>{
+        const email = emailRef.current.value
+        console.log('send email', emailRef.current.value);
+
+        if(!email){
+            console.log('please provide email', email);
+            return
+            
+        }else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+            console.log('please write valid email');
+            
+        }
+
+        // send validation email
+        emailPasswordReset(email)
+        .then(()=>{
+            alert('please check your email')
+        })
+        .catch((error) =>{
+            console.log(error);
+            
+        })
+        
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -59,7 +102,7 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" placeholder="Username or Email" name='email' className="input input-bordered" required />
+                            <input type="email" placeholder="Username or Email" name='email' ref={emailRef} className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -72,7 +115,7 @@ const Login = () => {
                                     name='password'
                                     className="input input-bordered w-full"
                                     required />
-                                <span className='absolute inset-y-0 top-4 right-2 right-0' onClick={() => setShowPassword(!showPassword)}>
+                                <span className='absolute inset-y-0 top-4 right-2' onClick={() => setShowPassword(!showPassword)}>
                                     {
                                         showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
                                     }
@@ -82,7 +125,7 @@ const Login = () => {
                                 <input type="checkbox" name='checkbox' />
                                 <p className='ml-2'>Remember Me</p>
                                 <label className="label">
-                                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                    <a onClick={handleForgotPassword} href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
                             </div>
                         </div>
@@ -91,7 +134,8 @@ const Login = () => {
                         </div>
                         <p>Don't have an account? <Link className='text-orange-400' to='/signUp'>Create an account</Link></p>
                     </form>
-                    <p className='p-2 text-red-500'>{error}</p>
+                    {loginError && <p className='p-2 text-red-500'>{loginError}</p>}
+                    <p className='p-2 text-red-500'>{success}</p>
                 </div>
             </div>
         </div>
