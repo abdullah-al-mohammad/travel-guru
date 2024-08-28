@@ -4,7 +4,7 @@ import { AuthContext } from '../../provider/AuthProvider';
 import { useContext, useState } from 'react'
 import facebook from '../../assets/icons/fb.png'
 import google from '../../assets/icons/google.png'
-import { sendEmailVerification } from 'firebase/auth';
+import { sendEmailVerification, updateProfile } from 'firebase/auth';
 
 
 
@@ -41,6 +41,15 @@ const Register = () => {
                 const user = result.user
                 console.log(user);
                 setSuccess('User Created Successfully')
+
+                // upadate profile name
+                updateProfile(user,{
+                    displayName: `${firstName} ${lastName}`
+                })
+                .then(() =>{
+                    console.log('update profile');
+                    
+                })
                 // send email verification
                 sendEmailVerification(user)
                     .then(() => {

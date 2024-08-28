@@ -1,8 +1,11 @@
 import { NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import { FaSearch } from 'react-icons/fa';
+import { useContext } from 'react'
+import { AuthContext } from '../../provider/AuthProvider';
 
 const Navbar = () => {
+    const { logout } = useContext(AuthContext)
     const links = <>
         <li><NavLink to='/news'>News</NavLink></li>
         <li><NavLink to='/destination'>Destination</NavLink></li>
@@ -10,6 +13,15 @@ const Navbar = () => {
         <li><NavLink to='/contact'>Contact</NavLink></li>
         <li><NavLink className='btn btn-warning px-6' to='/login'>Login</NavLink></li>
     </>
+    // logout
+       const handleLogout = () =>{
+            logout()
+            .then(() =>{
+                console.log('Sign-out successful.');
+                
+            })
+       }
+
     return (
         <div className="navbar bg-base-100 bg-transparent mb-8">
             <img className='w-20 bg-white p-2' src={logo} alt="" />
