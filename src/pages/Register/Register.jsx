@@ -9,15 +9,15 @@ import google from '../../assets/icons/google.png'
 
 
 const Register = () => {
-    
+
     const { createUser, signInWithGoogle, user, emailVerification } = useContext(AuthContext)
     const [success, setSuccess] = useState();
     const [error, setError] = useState();
     const location = useLocation()
     console.log(location);
-    
+
     const navigate = useNavigate()
-    
+
     const handleSignUp = e => {
         e.preventDefault()
         const form = new FormData(e.currentTarget)
@@ -28,44 +28,40 @@ const Register = () => {
         console.log(firstName, lastName, email, password);
 
 
-        if(password.length < 6 ){
+        if (password.length < 6) {
             setError('your password should be 6 charecter')
-        }else if(!/[A-Z]/.test(password)){
+        } else if (!/[A-Z]/.test(password)) {
             setError('your password should have at least one upperCase')
         }
-        
+
         // create user account function
         createUser(email, password)
-        .then((result => {
-                const user = result.user
-                console.log(user);
-                setSuccess('User Created Successfully')
-                
-            }))
-            .catch((error => {
-                console.error(error);
-                
-            }))
-            
-        }
-
-        // send email verification
-        emailVerification()
-        .then(() =>{
-            alert('please check your email and verify your account')
-        })
-        .catch((error) =>{
-            console.error(error);
-            
-        })
-        
-        const handleGoogleSignUp = () => {
-            // google signUp
-            signInWithGoogle()
             .then((result => {
                 const user = result.user
                 console.log(user);
-                navigate(user ? '/' : 'user not login' )
+                setSuccess('User Created Successfully')
+                // send email verification
+                emailVerification(user)
+                    .then(() => {
+                        alert('please check your email and verify your account')
+                    })
+            }))
+            .catch((error => {
+                console.error(error);
+
+            }))
+
+    }
+
+
+
+    const handleGoogleSignUp = () => {
+        // google signUp
+        signInWithGoogle()
+            .then((result => {
+                const user = result.user
+                console.log(user);
+                navigate(user ? '/' : 'user not login')
 
             }))
             .catch((error => {
