@@ -1,26 +1,26 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import { FaSearch } from 'react-icons/fa';
 import { useContext } from 'react'
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Navbar = () => {
-    const { logout } = useContext(AuthContext)
+    const { user, logout } = useContext(AuthContext)
     const links = <>
         <li><NavLink to='/news'>News</NavLink></li>
         <li><NavLink to='/destination'>Destination</NavLink></li>
         <li><NavLink to='/blog'>Blog</NavLink></li>
         <li><NavLink to='/contact'>Contact</NavLink></li>
-        <li><NavLink className='btn btn-warning px-6' to='/login'>Login</NavLink></li>
+        {/* <li><NavLink className='btn btn-warning px-6' to='/login'>Login</NavLink></li> */}
     </>
     // logout
-       const handleLogout = () =>{
-            logout()
-            .then(() =>{
+    const handleLogout = () => {
+        logout()
+            .then(() => {
                 console.log('Sign-out successful.');
-                
+
             })
-       }
+    }
 
     return (
         <div className="navbar bg-base-100 bg-transparent mb-8">
@@ -60,6 +60,14 @@ const Navbar = () => {
                         links
                     }
                 </ul>
+            </div>
+            <div className="navbar-end hidden lg:flex">
+                {user ? <button onClick={handleLogout} className="btn">Sign Out</button>
+                    :
+                    <Link to="/login">
+                        <button className="btn">Login</button>
+                    </Link>
+                }
             </div>
 
         </div>
