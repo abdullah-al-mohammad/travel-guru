@@ -4,13 +4,14 @@ import { AuthContext } from '../../provider/AuthProvider';
 import { useContext, useState } from 'react'
 import facebook from '../../assets/icons/fb.png'
 import google from '../../assets/icons/google.png'
+import { sendEmailVerification } from 'firebase/auth';
 
 
 
 
 const Register = () => {
 
-    const { createUser, signInWithGoogle, user, emailVerification } = useContext(AuthContext)
+    const { createUser, signInWithGoogle, user } = useContext(AuthContext)
     const [success, setSuccess] = useState();
     const [error, setError] = useState();
     const location = useLocation()
@@ -41,7 +42,7 @@ const Register = () => {
                 console.log(user);
                 setSuccess('User Created Successfully')
                 // send email verification
-                emailVerification(user)
+                sendEmailVerification(user)
                     .then(() => {
                         alert('please check your email and verify your account')
                     })

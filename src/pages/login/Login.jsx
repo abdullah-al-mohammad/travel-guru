@@ -27,7 +27,7 @@ const Login = () => {
         const accepted = form.get('checkbox')
         console.log(email, password, accepted);
 
-        
+
         if (password.length < 6) {
             setLoginError('your password should be 6 cherecter')
             return
@@ -36,11 +36,11 @@ const Login = () => {
             setLoginError('your password should have at least one upperCase')
             return
         }
-        else if(!accepted){
+        else if (!accepted) {
             setLoginError('Remember me')
             return
         }
-        
+
         // reset
         setLoginError('')
         setSuccess('')
@@ -49,9 +49,14 @@ const Login = () => {
             .then((result => {
                 const user = result.user;
                 console.log('User signed in', user);
-                
-                    // setSuccess('login Successful')
-                
+                if (user.emailVerified) {
+                    setSuccess('login Successful')
+                }else{
+                    alert('please verify your email  address')
+                    return
+                }
+
+
                 // navigate after login
                 navigate(location?.state ? location.state : '/')
 
@@ -62,29 +67,29 @@ const Login = () => {
             }))
     }
 
-    const handleForgotPassword = () =>{
+    const handleForgotPassword = () => {
         const email = emailRef.current.value
         console.log('send email', emailRef.current.value);
 
-        if(!email){
+        if (!email) {
             console.log('please provide email', email);
             return
-            
-        }else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             console.log('please write valid email');
-            
+
         }
 
         // send validation email
         emailPasswordReset(email)
-        .then(()=>{
-            alert('please check your email')
-        })
-        .catch((error) =>{
-            console.log(error);
-            
-        })
-        
+            .then(() => {
+                alert('please check your email')
+            })
+            .catch((error) => {
+                console.log(error);
+
+            })
+
     }
     return (
         <div className="hero bg-base-200 min-h-screen">

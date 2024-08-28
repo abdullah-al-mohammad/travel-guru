@@ -36,9 +36,9 @@ const AuthProvider = ({children}) => {
 
 
     // send email verification
-    const emailVerification = () =>{
-        sendEmailVerification(user)
-    }
+    // const emailVerification = () =>{
+    //     sendEmailVerification()
+    // }
     // function for Track user state
     useEffect(() =>{
        const unsubsCribe =  onAuthStateChanged(auth, currentUser =>{
@@ -51,7 +51,7 @@ const AuthProvider = ({children}) => {
     },[])
 
 
-    const authInfo = { auth, user,  loginUser, createUser, signInWithGoogle, emailPasswordReset, emailVerification }
+    const authInfo = { auth, user,  loginUser, createUser, signInWithGoogle, emailPasswordReset }
     return (
         <AuthContext.Provider  value={authInfo}>
             {children}
