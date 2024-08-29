@@ -3,6 +3,7 @@ import { useContext, useState, useRef } from 'react'
 import { AuthContext } from '../../provider/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import Navbar from '../navbar/Navbar';
 
 const Login = () => {
     const { user, loginUser, emailPasswordReset } = useContext(AuthContext)
@@ -51,7 +52,7 @@ const Login = () => {
                 console.log('User signed in', user);
                 if (user.emailVerified) {
                     setSuccess('login Successful')
-                }else{
+                } else {
                     alert('please verify your email  address')
                     return
                 }
@@ -92,55 +93,58 @@ const Login = () => {
 
     }
     return (
-        <div className="hero bg-base-200 min-h-screen">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="text-center lg:text-left">
-                    <h1 className="text-5xl font-bold">Login now!</h1>
-                    <p className="py-6">
-                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                        quasi. In deleniti eaque aut repudiandae et a id nisi.
-                    </p>
-                </div>
-                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                    <form className="card-body" onSubmit={handleUserLogin}>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Email</span>
-                            </label>
-                            <input type="email" placeholder="Username or Email" name='email' ref={emailRef} className="input input-bordered" required />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Password</span>
-                            </label>
-                            <div className='relative'>
-                                <input
-                                    type={showPassword ? "text" : "password"}
-                                    placeholder="password"
-                                    name='password'
-                                    className="input input-bordered w-full"
-                                    required />
-                                <span className='absolute inset-y-0 top-4 right-2' onClick={() => setShowPassword(!showPassword)}>
-                                    {
-                                        showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
-                                    }
-                                </span>
-                            </div>
-                            <div className='flex justify-between items-center'>
-                                <input type="checkbox" name='checkbox' />
-                                <p className='ml-2'>Remember Me</p>
+        <div>
+            <Navbar></Navbar>
+            <div className="hero bg-base-200 min-h-screen">
+                <div className="hero-content flex-col lg:flex-row-reverse">
+                    <div className="text-center lg:text-left">
+                        <h1 className="text-5xl font-bold">Login now!</h1>
+                        <p className="py-6">
+                            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+                            quasi. In deleniti eaque aut repudiandae et a id nisi.
+                        </p>
+                    </div>
+                    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                        <form className="card-body" onSubmit={handleUserLogin}>
+                            <div className="form-control">
                                 <label className="label">
-                                    <a onClick={handleForgotPassword} href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                    <span className="label-text">Email</span>
                                 </label>
+                                <input type="email" placeholder="Username or Email" name='email' ref={emailRef} className="input input-bordered" required />
                             </div>
-                        </div>
-                        <div className="form-control mt-6">
-                            <button className="btn btn-warning">Login</button>
-                        </div>
-                        <p>Don't have an account? <Link className='text-orange-400' to='/signUp'>Create an account</Link></p>
-                    </form>
-                    {loginError && <p className='p-2 text-red-500'>{loginError}</p>}
-                    <p className='p-2 text-red-500'>{success}</p>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Password</span>
+                                </label>
+                                <div className='relative'>
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        placeholder="password"
+                                        name='password'
+                                        className="input input-bordered w-full"
+                                        required />
+                                    <span className='absolute inset-y-0 top-4 right-2' onClick={() => setShowPassword(!showPassword)}>
+                                        {
+                                            showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
+                                        }
+                                    </span>
+                                </div>
+                                <div className='flex justify-between items-center'>
+                                    <input type="checkbox" name='checkbox' />
+                                    <p className='ml-2'>Remember Me</p>
+                                    <label className="label">
+                                        <a onClick={handleForgotPassword} href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="form-control mt-6">
+                                <button className="btn btn-warning">Login</button>
+                            </div>
+                            <p>Don't have an account? <Link className='text-orange-400' to='/signUp'>Create an account</Link></p>
+                        </form>
+                        {loginError && <p className='p-2 text-red-500'>{loginError}</p>}
+                        <p className='p-2 text-red-500'>{success}</p>
+                    </div>
                 </div>
             </div>
         </div>

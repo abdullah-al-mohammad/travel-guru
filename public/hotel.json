@@ -1,8 +1,9 @@
 [
     {
-        "pic": "https://example.com/image1.jpg",
-        "title": "Cozy Cottage by the Lake",
-        "paragraph": "Enjoy a peaceful stay in our cozy cottage with stunning lake views and modern amenities.",
+        "id": 1,
+        "img": "https://i.ibb.co/ckg1tH0/Rectangle-26.png",
+        "title": "Light bright airy stylish apt & safe peaceful stay",
+        "details": "4 guests   2 bedrooms   2 beds   2 baths Wif Air conditioning Kitchen Cancellation fexibility availiable",
         "rate": "4.9 (20)",
         "price": {
             "total": "$167",
@@ -10,20 +11,22 @@
         }
     },
     {
-        "pic": "https://example.com/image2.jpg",
-        "title": "Modern Apartment in the City Center",
-        "paragraph": "Experience city life in our stylish apartment, located in the heart of downtown with easy access to attractions.",
-        "rate": "4.9 (20)",
+        "id": 2,
+        "img": "https://i.ibb.co/60Qkv2t/Rectangle-27.png",
+        "title": "Apartment in Lost Panorama",
+        "details": "Enjoy breathtaking ocean views from this modern and stylish studio.",
+        "rate": "4.9 (10)",
         "price": {
             "total": "$167",
             "perNight": "$34/night"
         }
     },
     {
-        "pic": "https://example.com/image3.jpg",
-        "title": "Mountain Retreat Cabin",
-        "paragraph": "Escape to our secluded mountain cabin, perfect for a relaxing getaway with breathtaking views.",
-        "rate": "4.9 (20)",
+        "id": 3,
+        "img": "https://i.ibb.co/NtxBnnf/Rectangle-28.png",
+        "title": "AR Lounge & Pool (r&r + b&b)",
+        "details": "Escape to this charming cottage surrounded by nature and tranquility.",
+        "rate": "4.9 (25)",
         "price": {
             "total": "$167",
             "perNight": "$34/night"

@@ -11,6 +11,7 @@ const Navbar = () => {
         <li><NavLink to='/destination'>Destination</NavLink></li>
         <li><NavLink to='/blog'>Blog</NavLink></li>
         <li><NavLink to='/contact'>Contact</NavLink></li>
+        {user && <li><NavLink to='/hotel'>Sufi Ahmed</NavLink></li>}
     </>
     // logout
     const handleLogout = () => {
@@ -66,7 +67,7 @@ const Navbar = () => {
                     }
                 </ul>
             </div>
-            <div className="navbar-end md:flex-col lg:flex">
+            <div>
                 {user ? <button onClick={handleLogout} className="btn btn-error">Sign Out</button>
                     :
                     <Link to="/login">
